@@ -30,7 +30,7 @@ def binary_search(arr, target):
       else:
         low = middle + 1
 
-      return -1 # not found
+  return -1 # not found
 
 
 # STRETCH: write a recursive implementation of Binary Search 
