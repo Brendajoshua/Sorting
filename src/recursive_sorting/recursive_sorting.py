@@ -49,15 +49,46 @@ def merge_sort( arr ):
 # STRETCH: implement an in-place merge sort algorithm
 def merge_in_place(arr, start, mid, end):
     # TO-DO
+    r_start = mid + 1
+    # if start == mid or r_start == end:
+    # return after next comparison
+    while start <= mid and r_start <= end:
+        #compare left start to right start
+        #if left is smaller than or equal to right, leave in place and move start
+        if arr[start] <= arr[r_start]:
+            start += 1
+        # if right is smaller, store in temp and move everything over by one,
+        # then put temp at start and move pointers
+        elif arr[start] > arr[r_start]:
+            # arr[start:r-start + 1] = [arr[r_start], *arr[start:r_start]]
+            temp = arr[r_start]
+            for i in range(r_start, start, -1):
+                arr[i] = arr[i - 1]
+            arr[start] = temp
 
+            r_start += 1
+            mid += 1
+            start += 1
     return arr
 
 def merge_sort_in_place(arr, l, r): 
     # TO-DO
+    # if array contains one element, it is sorted 
+    # if l >= r:
+    # return arr
+    # if array contains more than one element, sort each half in place
+    # and merge the result in place
+    if l < r:
+        mid = (l + r) // 2
+        merge_sort_in_place(arr, l, mid)
+        merge_sort_in_place(arr, mid + 1, r)
+        return merge_in_place(arr, l, mid, r)
+    else:
+        return arr
 
-    return arr
-
-
+arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
+print(merge_sort_in_place(arr1, 0, len(arr1)-1))
+    
 # STRETCH: implement the Timsort function below
 # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
 def timsort( arr ):
